@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Menus">
+<title>Menus de saison</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#1f5c45">
+<style>
+:root{--bg:#f2f5ef;--sf:#fff;--tx:#1b2a22;--mu:#66756c;--ac:#1f5c45;--ac2:#e8b931;--ln:#dde4d9;--bad:#b3402e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a15;--sf:#1a261f;--tx:#e9f0ea;--mu:#93a499;--ac:#6fcf9f;--ac2:#e8b931;--ln:#2a3a31;--bad:#ef8a77;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a15;--sf:#1a261f;--tx:#e9f0ea;--mu:#93a499;--ac:#6fcf9f;--ln:#2a3a31;--bad:#ef8a77;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,sans-serif;padding-bottom:70px}
+main{max-width:560px;margin:0 auto;padding:12px 14px}
+h1{font-size:24px;font-weight:800;margin:6px 0}h2{font-size:17px;margin:18px 0 6px;font-weight:600}
+.c{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:10px 12px;margin:8px 0}
+.mu{color:var(--mu);font-size:13px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
+button,input,select,textarea{font:inherit;color:var(--tx)}
+button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:8px 12px;min-height:40px}
+button.g{background:transparent;color:var(--ac);border:1px solid var(--ln)}
+button.s{padding:2px 8px;min-height:32px}
+input,select,textarea{background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:8px;width:100%}
+input.n{width:70px}
+summary{font-weight:600;cursor:pointer}
+.t{display:inline-block;font-size:12px;background:var(--ac2);color:#222;border-radius:8px;padding:0 6px;margin-left:4px}
+.bad{color:var(--bad)}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--sf);border-top:1px solid var(--ln);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);overflow-x:auto}
+nav button{flex:1;background:none;color:var(--mu);border-radius:0;min-width:62px;font-size:12px;padding:8px 2px}
+nav button.on{color:var(--ac);font-weight:800;box-shadow:inset 0 3px var(--ac2)}
+.bar{height:10px;background:var(--ln);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+</style></head><body><main id="app"></main><nav id="nav"></nav>
+<script>
+const MO=["","janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+// t: r = repas, g = goûter ; m = mois de saison ([] = toute l’année) ; a = préparation à l’avance ; i = [aliment, qté/pers., unité, rayon] (F légumes/fruits, O œufs, C crèmerie, E épicerie, V viande/poisson)
+const R=[
+{n:"Soupe de potimarron",t:"r",m:[10,11,12,1,2],a:1,i:[["potimarron",.3,"kg","F"],["oignon",.5,"pc","F"],["crème fraîche",2,"cl","C"]]},
+{n:"Velouté de chou-fleur",t:"r",m:[10,11,12,1,2,3],a:1,i:[["chou-fleur",.25,"kg","F"],["pomme de terre",1,"pc","F"],["lait",10,"cl","C"]]},
+{n:"Quiche aux poireaux",t:"r",m:[10,11,12,1,2,3],a:1,i:[["poireau",.2,"kg","F"],["œufs",1,"pc","O"],["crème fraîche",5,"cl","C"],["pâte brisée",.25,"pc","E"]]},
+{n:"Lentilles et poireaux vinaigrette",t:"r",m:[10,11,12,1,2,3],a:1,i:[["lentilles vertes",70,"g","E"],["poireau",.2,"kg","F"],["moutarde",.05,"pot","E"]]},
+{n:"Dal de lentilles corail",t:"r",m:[],a:1,i:[["lentilles corail",70,"g","E"],["oignon",.5,"pc","F"],["lait de coco",10,"cl","E"],["carotte",.1,"kg","F"]]},
+{n:"Cabillaud, purée de panais",t:"r",m:[11,12,1,2,3],a:0,i:[["cabillaud",150,"g","V"],["panais",.25,"kg","F"],["beurre",10,"g","C"]]},
+{n:"Poulet rôti et carottes",t:"r",m:[],a:0,i:[["poulet",.25,"kg","V"],["carotte",.2,"kg","F"],["huile d’olive",1,"càs","E"]]},
+{n:"Blanquette de dinde",t:"r",m:[],a:1,i:[["dinde",150,"g","V"],["carotte",.1,"kg","F"],["champignons",.1,"kg","F"],["crème fraîche",5,"cl","C"]]},
+{n:"Chili de haricots rouges",t:"r",m:[],a:1,i:[["haricots rouges",.1,"kg","E"],["tomates concassées",.15,"kg","E"],["oignon",.5,"pc","F"],["poivron",.5,"pc","F"]]},
+{n:"Boulgour aux légumes rôtis",t:"r",m:[9,10,11,3,4],a:0,i:[["boulgour",70,"g","E"],["courge",.2,"kg","F"],["oignon",.5,"pc","F"]]},
+{n:"Omelette aux champignons",t:"r",m:[9,10,11,3,4],a:0,i:[["œufs",2,"pc","O"],["champignons",.1,"kg","F"],["salade",.1,"pc","F"]]},
+{n:"Gratin de courgettes",t:"r",m:[6,7,8,9],a:0,i:[["courgette",.3,"kg","F"],["gruyère râpé",30,"g","C"],["crème fraîche",5,"cl","C"]]},
+{n:"Ratatouille",t:"r",m:[6,7,8,9],a:1,i:[["aubergine",.15,"kg","F"],["courgette",.15,"kg","F"],["poivron",.5,"pc","F"],["tomate",.2,"kg","F"]]},
+{n:"Pâtes tomates basilic",t:"r",m:[6,7,8,9],a:0,i:[["pâtes",90,"g","E"],["tomate",.3,"kg","F"],["basilic",.1,"pot","F"]]},
+{n:"Salade tomates mozzarella",t:"r",m:[6,7,8,9],a:0,i:[["tomate",.25,"kg","F"],["mozzarella",.5,"pc","C"],["pain",.1,"pc","E"]]},
+{n:"Salade concombre feta",t:"r",m:[5,6,7,8],a:0,i:[["concombre",.5,"pc","F"],["feta",50,"g","C"],["semoule",60,"g","E"]]},
+{n:"Asperges et œufs mollets",t:"r",m:[4,5,6],a:0,i:[["asperges",.25,"kg","F"],["œufs",1,"pc","O"],["pain",.1,"pc","E"]]},
+{n:"Risotto aux petits pois",t:"r",m:[4,5,6],a:0,i:[["orge perlé",70,"g","E"],["petits pois",.15,"kg","F"],["parmesan",15,"g","C"]]},
+{n:"Compote de pommes maison",t:"g",m:[9,10,11,12,1,2,3],a:1,i:[["pomme",.25,"kg","F"]]},
+{n:"Yaourt et banane",t:"g",m:[],a:0,i:[["yaourt nature",1,"pc","C"],["banane",1,"pc","F"]]},
+{n:"Crêpes",t:"g",m:[],a:1,i:[["farine",40,"g","E"],["œufs",.5,"pc","O"],["lait",12,"cl","C"]]},
+{n:"Gâteau au yaourt",t:"g",m:[],a:1,i:[["yaourt nature",.25,"pc","C"],["farine",40,"g","E"],["œufs",.5,"pc","O"],["sucre",25,"g","E"]]},
+{n:"Poire et fromage blanc",t:"g",m:[9,10,11,12,1],a:0,i:[["poire",1,"pc","F"],["fromage blanc",100,"g","C"]]},
+{n:"Fraises et fromage blanc",t:"g",m:[4,5,6],a:0,i:[["fraises",.15,"kg","F"],["fromage blanc",100,"g","C"]]},
+{n:"Abricots et amandes",t:"g",m:[6,7,8],a:0,i:[["abricots",.2,"kg","F"],["amandes",15,"g","E"]]},
+{n:"Clémentines et noix",t:"g",m:[11,12,1,2],a:0,i:[["clémentines",2,"pc","F"],["noix",15,"g","E"]]},
+{n:"Soupe de carottes au cumin",t:"r",m:[10,11,12,1,2,3],a:1,i:[["carotte",.3,"kg","F"],["oignon",.5,"pc","F"],["cumin",.02,"pot","E"]]},
+{n:"Gratin de chou-fleur",t:"r",m:[10,11,12,1,2,3],a:0,i:[["chou-fleur",.3,"kg","F"],["lait",12,"cl","C"],["gruyère râpé",30,"g","C"]]},
+{n:"Tajine de poulet et pois chiches",t:"r",m:[],a:1,i:[["poulet",.2,"kg","V"],["pois chiches",.1,"kg","E"],["carotte",.1,"kg","F"],["oignon",.5,"pc","F"]]},
+{n:"Curry de légumes",t:"r",m:[],a:1,i:[["chou-fleur",.15,"kg","F"],["pois chiches",.08,"kg","E"],["lait de coco",10,"cl","E"],["oignon",.5,"pc","F"]]},
+{n:"Hachis de lentilles et carottes",t:"r",m:[],a:1,i:[["lentilles vertes",70,"g","E"],["carotte",.15,"kg","F"],["pomme de terre",1.5,"pc","F"],["beurre",10,"g","C"]]},
+{n:"Truite et pommes de terre vapeur",t:"r",m:[],a:0,i:[["truite",150,"g","V"],["pomme de terre",2,"pc","F"],["citron",.25,"pc","F"]]},
+{n:"Pâtes à la courge et sauge",t:"r",m:[10,11,12,1,2],a:0,i:[["pâtes",90,"g","E"],["courge",.2,"kg","F"],["parmesan",15,"g","C"]]},
+{n:"Polenta et poêlée de champignons",t:"r",m:[9,10,11],a:0,i:[["polenta",70,"g","E"],["champignons",.15,"kg","F"],["ail",.25,"pc","F"]]},
+{n:"Gaspacho",t:"r",m:[6,7,8,9],a:1,i:[["tomate",.4,"kg","F"],["concombre",.25,"pc","F"],["poivron",.25,"pc","F"]]},
+{n:"Courgettes farcies",t:"r",m:[6,7,8,9],a:0,i:[["courgette",.3,"kg","F"],["dinde hachée",100,"g","V"],["semoule",40,"g","E"]]},
+{n:"Haricots verts et œufs durs",t:"r",m:[6,7,8,9],a:0,i:[["haricots verts",.2,"kg","F"],["œufs",1,"pc","O"],["pomme de terre",1,"pc","F"]]},
+{n:"Soupe de petits pois à la menthe",t:"r",m:[4,5,6],a:1,i:[["petits pois",.25,"kg","F"],["pomme de terre",1,"pc","F"],["menthe",.1,"pot","F"]]},
+{n:"Muffins aux pommes",t:"g",m:[9,10,11,12,1,2],a:1,i:[["pomme",.5,"pc","F"],["farine",40,"g","E"],["œufs",.5,"pc","O"],["sucre",20,"g","E"]]},
+{n:"Salade de fruits d’hiver",t:"g",m:[11,12,1,2,3],a:0,i:[["pomme",.5,"pc","F"],["clémentines",1,"pc","F"],["kiwi",1,"pc","F"]]},
+{n:"Melon et jambon sec",t:"g",m:[6,7,8],a:0,i:[["melon",.25,"pc","F"],["jambon sec",1,"tr","V"]]},
+{n:"Pêche et yaourt",t:"g",m:[6,7,8,9],a:0,i:[["pêche",1,"pc","F"],["yaourt nature",1,"pc","C"]]},
+{n:"Semoule au lait",t:"g",m:[],a:1,i:[["semoule",25,"g","E"],["lait",20,"cl","C"],["sucre",10,"g","E"]]},
+{n:"Raisin et comté",t:"g",m:[8,9,10],a:0,i:[["raisin",.15,"kg","F"],["comté",20,"g","C"]]}];
+// Aliments souvent cités pour leur teneur en cadmium (indicatif, à ajuster dans « Éviter »)
+const AV0=["foie","rognon","abats","huître","moule","coquille","crevette","crabe","algue","tournesol","graines de lin","pavot","cacao","chocolat","épinard"];
+const ST0=[["papier toilette",2,1],["dentifrice",1,1],["liquide vaisselle",1,1],["lessive",1,1],["sacs poubelle",1,1],["éponges",2,1]];
+let S={p:2,tab:"j",wk:0,fav:[],ff:[],av:AV0.slice(),hist:[],plan:{},stock:ST0.map(x=>({n:x[0],q:x[1],min:x[2],c:1})),bud:{w:120,sp:[]},cus:[],pr:{},chk:{},rec:null};
+try{const x=localStorage.getItem("menus1");if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}
+const sv=()=>{try{localStorage.setItem("menus1",JSON.stringify(S))}catch(e){}};
+const pad=n=>String(n).padStart(2,"0"),dk=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const TODAY=new Date(),TK=dk(TODAY),all=()=>R.concat(S.cus),by=n=>all().find(r=>r.n==n);
+const lab=d=>d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
+const txt=r=>(r.n+" "+r.i.map(x=>x[0]).join(" ")).toLowerCase();
+const bad=r=>S.av.filter(a=>a&&txt(r).includes(a.toLowerCase()));
+const recent=(n,ref)=>S.hist.some(h=>h.n==n&&Math.abs((new Date(ref)-new Date(h.d))/864e5)<14);
+const inSeason=(r,d)=>!r.m.length||r.m.includes(d.getMonth()+1);
+const q1=x=>Math.round(x*10)/10,esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function gen(from,n){const used=new Set(Object.entries(S.plan).filter(([k])=>Math.abs((new Date(k)-from)/864e5)<14).flatMap(([,v])=>[v.r,v.g]));
+ const pick=(t,d)=>{const c=all().filter(r=>r.t==t&&!bad(r).length&&inSeason(r,d)&&!used.has(r.n)&&!recent(r.n,dk(d)));
+  if(!c.length)return null;const sc=r=>Math.random()+(S.fav.includes(r.n)?.6:0)+(S.ff.some(f=>txt(r).includes(f.toLowerCase()))?.4:0);
+  c.sort((a,b)=>sc(b)-sc(a));used.add(c[0].n);return c[0].n};
+ for(let i=0;i<n;i++){const d=add(from,i),k=dk(d);S.plan[k]=S.plan[k]||{};
+  if(!S.plan[k].r)S.plan[k].r=pick("r",d);if(!S.plan[k].g)S.plan[k].g=pick("g",d)}sv()}
+function done(n,k){if(!S.hist.some(h=>h.n==n&&h.d==k))S.hist.push({n,d:k});sv();draw()}
+function rc(n,k,cb){const r=by(n);if(!r)return"";const b=bad(r),h=S.hist.some(x=>x.n==n&&x.d==k);
+ return `<details class="c"><summary>${esc(n)}${r.a?'<span class="t">à l’avance</span>':""}${inSeason(r,TODAY)?"":'<span class="t">hors saison</span>'}</summary>
+ ${b.length?`<div class="bad mu">Contient : ${esc(b.join(", "))}</div>`:""}
+ <ul>${r.i.map(x=>`<li>${q1(x[1]*S.p)} ${x[2]} ${esc(x[0])}</li>`).join("")}</ul>
+ <div class="row"><button class="s g" onclick="fv('${esc(n)}')">${S.fav.includes(n)?"★ Favori":"☆ Favori"}</button>${k?`<button class="s" onclick="done('${esc(n)}','${k}')">${h?"Fait ✓":"Marquer fait"}</button><button class="s g" onclick="swap('${k}','${r.t}')">Changer</button>`:""}</div></details>`}
+function fv(n){S.fav=S.fav.includes(n)?S.fav.filter(x=>x!=n):S.fav.concat(n);sv();draw()}
+function swap(k,t){const old=S.plan[k][t];delete S.plan[k][t];const d=new Date(k+"T12:00");S.hist.push({n:old,d:"1970-01-01"});S.plan[k][t]=null;
+ S.hist.pop();const tmp=S.plan[k];const h=S.hist.slice();S.hist.push({n:old,d:k});gen(d,1);S.hist=h;sv();draw()}
+// Courses
+function need(){const m={};const days=[...Array(7)].map((_,i)=>dk(add(TODAY,i)));
+ days.forEach(k=>{const p=S.plan[k];if(!p)return;[p.r,p.g].forEach(n=>{const r=n&&by(n);if(r)r.i.forEach(x=>{const id=x[0]+"|"+x[2];m[id]=m[id]||{n:x[0],u:x[2],r:x[3],q:0};m[id].q+=x[1]*S.p})})});
+ const L=Object.values(m).map(o=>{const s=S.stock.find(z=>z.n.toLowerCase()==o.n.toLowerCase());if(s)o.q=Math.max(0,o.q-s.q);return o}).filter(o=>o.q>0);
+ S.stock.filter(s=>s.q<s.min).forEach(s=>L.push({n:s.n,u:"",r:"E",q:s.min-s.q,c:1}));return L}
+const shops=[["O","Lidl Caluire · œufs"],["F","Eau Vive Croix-Rousse · fruits et légumes bio"],["*","Auchan Drive Caluire · le reste (comparé à Intermarché Croix-Rousse)"]];
+function setp(n,i,v){S.pr[n]=S.pr[n]||[0,0];S.pr[n][i]=parseFloat(v)||0;sv();tot()}
+function tot(){let a=0,b=0;Object.entries(S.pr).forEach(([n,v])=>{if(document.getElementById("p_"+n)){a+=v[0];b+=v[1]}});const e=document.getElementById("cmp");
+ if(e)e.textContent=a||b?`Auchan ${a.toFixed(2)} € · Intermarché ${b.toFixed(2)} € → ${a<=b?"Auchan":"Intermarché"} moins cher de ${Math.abs(a-b).toFixed(2)} €`:"Saisissez les prix pour comparer."}
+function chk(n){S.chk[n]=!S.chk[n];sv();draw()}
+function ln(o,price){return `<div class="row sp" style="padding:4px 0;border-bottom:1px solid var(--ln)"><label class="row"><input type="checkbox" style="width:auto" ${S.chk[o.n]?"checked":""} onchange="chk('${esc(o.n)}')"><span style="${S.chk[o.n]?"text-decoration:line-through":""}">${q1(o.q)} ${o.u} ${esc(o.n)}${o.c?' <span class="t">conso.</span>':""}</span></label>
+ ${price?`<span id="p_${esc(o.n)}" class="row"><input class="n" inputmode="decimal" placeholder="Auch." value="${(S.pr[o.n]||[])[0]||""}" onchange="setp('${esc(o.n)}',0,this.value)"><input class="n" inputmode="decimal" placeholder="Inter." value="${(S.pr[o.n]||[])[1]||""}" onchange="setp('${esc(o.n)}',1,this.value)"></span>`:""}</div>`}
+// Vues
+const V={
+j(){const k=TK,p=S.plan[k]||{},nxt=[1,2,3].map(i=>dk(add(TODAY,i))).flatMap(d=>{const x=S.plan[d]||{};return[x.r,x.g].filter(Boolean).map(n=>({n,d})).filter(o=>by(o.n)&&by(o.n).a)});
+ return `<h1>Aujourd’hui</h1><div class="mu">${lab(TODAY)}</div>
+ <div class="row sp c"><b>Personnes</b><span class="row"><button class="s g" onclick="S.p=Math.max(1,S.p-1);sv();draw()">−</button><b>${S.p}</b><button class="s g" onclick="S.p++;sv();draw()">+</button></span></div>
+ ${p.r||p.g?"":`<div class="c">Rien de prévu. <button onclick="gen(TODAY,7);draw()">Proposer la semaine</button></div>`}
+ <h2>Plat du jour</h2>${p.r?rc(p.r,k,1):'<div class="mu">—</div>'}
+ <h2>Goûter</h2>${p.g?rc(p.g,k,1):'<div class="mu">—</div>'}
+ <h2>À préparer en avance</h2>${nxt.length?nxt.map(o=>`<div class="mu">${lab(new Date(o.d+"T12:00"))}</div>`+rc(o.n,"",0)).join(""):'<div class="mu">Rien à anticiper dans les 3 prochains jours.</div>'}`},
+p(){const mon=add(TODAY,S.wk*7-((TODAY.getDay()+6)%7));return `<h1>Planning</h1><div class="row sp"><button class="g s" onclick="S.wk--;draw()">‹</button><b>Semaine du ${mon.getDate()} ${MO[mon.getMonth()+1]}</b><button class="g s" onclick="S.wk++;draw()">›</button></div>
+ <button style="margin:8px 0" onclick="gen(${S.wk>=0?"mon<TODAY?TODAY:mon":"mon"},7);draw()">Compléter les jours vides</button>
+ ${[...Array(7)].map((_,i)=>{const d=add(mon,i),k=dk(d),x=S.plan[k]||{};return `<div class="c"><b>${lab(d)}${k==TK?' <span class="t">auj.</span>':""}</b>${x.r?rc(x.r,k,1):'<div class="mu">Pas de plat</div>'}${x.g?rc(x.g,k,1):""}</div>`}).join("")}`},
+r(){const q=(S.rec||"").toLowerCase();const L=all().filter(r=>!q||txt(r).includes(q));
+ return `<h1>Recettes</h1><input placeholder="Rechercher" value="${esc(S.rec||"")}" oninput="S.rec=this.value;draw(1)" id="q">
+ <div class="mu" style="margin:6px 0">Toutes les recettes (${L.length}). ★ = favoris en premier.</div>
+ ${L.sort((a,b)=>S.fav.includes(b.n)-S.fav.includes(a.n)).map(r=>rc(r.n,"",0)).join("")}
+ <h2>Ajouter une recette maison</h2><div class="c"><input id="rn" placeholder="Nom"><select id="rt" style="margin-top:6px"><option value="r">Repas</option><option value="g">Goûter</option></select>
+ <input id="rm" placeholder="Mois de saison, ex. 6,7,8 (vide = toute l’année)" style="margin-top:6px"><textarea id="ri" rows="4" placeholder="1 ingrédient par ligne : nom, quantité par personne, unité, rayon (F légumes/fruits, O œufs, C crèmerie, E épicerie, V viande/poisson)" style="margin-top:6px"></textarea>
+ <label class="row mu" style="margin:6px 0"><input type="checkbox" id="ra" style="width:auto">Se prépare à l’avance</label><button onclick="addR()">Enregistrer</button></div>
+ <h2>Mettre à jour le catalogue</h2><div class="c mu"><button onclick="maj(1)">Mettre à jour depuis internet</button> <span id="mj"></span></div><h2>Importer des recettes</h2><div class="c mu">Ou collez ici un lot de recettes au format JSON :<textarea id="ij" rows="3" style="margin:6px 0"></textarea><button class="g" onclick="imp()">Importer</button></div>`},
+a(){const ls=(t,a,ph)=>`<div class="c"><b>${t}</b><div class="row" style="margin:6px 0">${S[a].map((x,i)=>`<button class="s g" onclick="S.${a}.splice(${i},1);sv();draw()">${esc(x)} ✕</button>`).join("")||'<span class="mu">Vide</span>'}</div><div class="row"><input id="i_${a}" placeholder="${ph}" style="flex:1"><button onclick="ad('${a}')">Ajouter</button></div></div>`;
+ return `<h1>Aliments</h1>${ls("Favoris (proposés plus souvent)","ff","ex. lentilles")}${ls("À éviter (aucune recette qui en contient)","av","ex. foie")}<div class="mu">La liste de départ reprend des aliments souvent cités pour leur cadmium (abats, coquillages, crustacés, algues, graines de tournesol et de lin, cacao, épinards). Elle est indicative : la teneur dépend aussi de l’origine et des sols. Pour un avis adapté à votre situation, voyez un professionnel de santé.</div>`},
+c(){const L=need();const g=s=>L.filter(o=>s=="O"?o.r=="O"&&!o.c:s=="F"?o.r=="F"&&!o.c:o.r!="O"&&o.r!="F"||o.c);
+ return `<h1>Courses</h1><div class="mu">Pour 7 jours, ${S.p} pers., stock déduit. Privilégiez le bio et la saison.</div>${L.length?shops.map(([s,t])=>{const l=g(s);return l.length?`<h2>${t}</h2><div class="c">${l.map(o=>ln(o,s=="*")).join("")}</div>`:""}).join(""):'<div class="c">Liste vide. Planifiez des repas.</div>'}
+ <div class="c mu" id="cmp"></div><div class="row"><input class="n" id="tt" inputmode="decimal" placeholder="Total €" style="width:110px"><button onclick="spend()">Ajouter aux dépenses</button></div>`},
+s(){return `<h1>Stock</h1><div class="mu">Un article sous son seuil passe dans les courses.</div>${S.stock.map((s,i)=>`<div class="c row sp"><span>${esc(s.n)}${s.c?' <span class="t">conso.</span>':""}</span><span class="row"><input class="n" inputmode="decimal" value="${s.q}" onchange="S.stock[${i}].q=parseFloat(this.value)||0;sv();draw()"><span class="mu">seuil</span><input class="n" inputmode="decimal" value="${s.min}" onchange="S.stock[${i}].min=parseFloat(this.value)||0;sv()"><button class="s g" onclick="S.stock.splice(${i},1);sv();draw()">✕</button></span></div>`).join("")}
+ <div class="c row"><input id="sn" placeholder="Article" style="flex:1"><select id="sc" style="width:auto"><option value="0">Aliment</option><option value="1">Conso.</option></select><button onclick="addS()">Ajouter</button></div>`},
+b(){const sp=S.bud.sp.reduce((a,x)=>a+x.v,0),pc=Math.min(100,sp/(S.bud.w||1)*100);return `<h1>Budget</h1><div class="c"><div class="row sp"><b>Budget de la semaine</b><span class="row"><input class="n" inputmode="decimal" value="${S.bud.w}" onchange="S.bud.w=parseFloat(this.value)||0;sv();draw()">€</span></div>
+ <div class="bar" style="margin:10px 0"><i style="width:${pc}%"></i></div><b class="${sp>S.bud.w?"bad":""}">${sp.toFixed(2)} € dépensés</b> <span class="mu">· reste ${(S.bud.w-sp).toFixed(2)} €</span></div>
+ <div class="c row"><input id="bl" placeholder="Libellé" style="flex:1"><input class="n" id="bv" inputmode="decimal" placeholder="€"><button onclick="spend2()">Ajouter</button></div>
+ ${S.bud.sp.map((x,i)=>`<div class="row sp mu"><span>${x.d} · ${esc(x.l)}</span><span>${x.v.toFixed(2)} € <button class="s g" onclick="S.bud.sp.splice(${i},1);sv();draw()">✕</button></span></div>`).join("")}
+ <button class="g" style="margin-top:10px" onclick="S.bud.sp=[];sv();draw()">Remettre à zéro</button>`}};
+function ad(a){const v=document.getElementById("i_"+a).value.trim();if(v){S[a].push(v);sv();draw()}}
+function addS(){const n=sn.value.trim();if(n){S.stock.push({n,q:0,min:1,c:+sc.value});sv();draw()}}
+function spend(){const v=parseFloat(tt.value);if(v>0){S.bud.sp.push({d:TK,l:"Courses",v});sv();S.tab="b";draw()}}
+function spend2(){const v=parseFloat(bv.value);if(v>0){S.bud.sp.push({d:TK,l:bl.value||"Dépense",v});sv();draw()}}
+function addR(){const n=rn.value.trim(),i=ri.value.split("\n").map(l=>l.split(",").map(x=>x.trim())).filter(x=>x[0]).map(x=>[x[0],parseFloat(x[1])||1,x[2]||"pc",(x[3]||"E").toUpperCase()]);
+ if(!n||!i.length)return;S.cus.push({n,t:rt.value,m:rm.value.split(",").map(x=>parseInt(x)).filter(x=>x>0&&x<13),a:ra.checked?1:0,i});sv();draw()}
+function imp(){try{const a=JSON.parse(ij.value);a.filter(r=>r.n&&r.i&&r.t).forEach(r=>{r.m=r.m||[];if(!by(r.n))S.cus.push(r)});sv();draw()}catch(e){alert("JSON invalide")}}
+const TABS=[["j","Jour"],["p","Planning"],["r","Recettes"],["a","Aliments"],["c","Courses"],["s","Stock"],["b","Budget"]];
+function draw(keep){const y=scrollY;document.getElementById("app").innerHTML=V[S.tab]();
+ nav.innerHTML=TABS.map(([k,t])=>`<button class="${k==S.tab?"on":""}" onclick="S.tab='${k}';draw();scrollTo(0,0)">${t}</button>`).join("");
+ if(keep){const q=document.getElementById("q");if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}scrollTo(0,y);if(S.tab=="c")tot()}
+async function maj(v){const e=document.getElementById("mj");try{const r=await fetch("recettes.json?"+Date.now());const a=await r.json();let n=0;a.filter(x=>x.n&&x.i&&x.t).forEach(x=>{x.m=x.m||[];if(!by(x.n)){S.cus.push(x);n++}});sv();if(e)e.textContent=n+" recette(s) ajoutée(s)";if(n&&S.tab!="r"||n&&!v)draw()}catch(x){if(e)e.textContent="Hors ligne ou fichier introuvable"}}
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+if(navigator.onLine)maj(0);
+draw();
+</script></body></html>

@@ -1,0 +1,1320 @@
+[
+{
+"n": "Soupe de potimarron",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2
+],
+"a": 1,
+"i": [
+[
+"potimarron",
+0.3,
+"kg",
+"F"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+],
+[
+"crème fraîche",
+2,
+"cl",
+"C"
+]
+]
+},
+{
+"n": "Velouté de chou-fleur",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 1,
+"i": [
+[
+"chou-fleur",
+0.25,
+"kg",
+"F"
+],
+[
+"pomme de terre",
+1,
+"pc",
+"F"
+],
+[
+"lait",
+10,
+"cl",
+"C"
+]
+]
+},
+{
+"n": "Quiche aux poireaux",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 1,
+"i": [
+[
+"poireau",
+0.2,
+"kg",
+"F"
+],
+[
+"œufs",
+1,
+"pc",
+"O"
+],
+[
+"crème fraîche",
+5,
+"cl",
+"C"
+],
+[
+"pâte brisée",
+0.25,
+"pc",
+"E"
+]
+]
+},
+{
+"n": "Lentilles et poireaux vinaigrette",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 1,
+"i": [
+[
+"lentilles vertes",
+70,
+"g",
+"E"
+],
+[
+"poireau",
+0.2,
+"kg",
+"F"
+],
+[
+"moutarde",
+0.05,
+"pot",
+"E"
+]
+]
+},
+{
+"n": "Dal de lentilles corail",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"lentilles corail",
+70,
+"g",
+"E"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+],
+[
+"lait de coco",
+10,
+"cl",
+"E"
+],
+[
+"carotte",
+0.1,
+"kg",
+"F"
+]
+]
+},
+{
+"n": "Cabillaud, purée de panais",
+"t": "r",
+"m": [
+11,
+12,
+1,
+2,
+3
+],
+"a": 0,
+"i": [
+[
+"cabillaud",
+150,
+"g",
+"V"
+],
+[
+"panais",
+0.25,
+"kg",
+"F"
+],
+[
+"beurre",
+10,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Poulet rôti et carottes",
+"t": "r",
+"m": [],
+"a": 0,
+"i": [
+[
+"poulet",
+0.25,
+"kg",
+"V"
+],
+[
+"carotte",
+0.2,
+"kg",
+"F"
+],
+[
+"huile d’olive",
+1,
+"càs",
+"E"
+]
+]
+},
+{
+"n": "Blanquette de dinde",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"dinde",
+150,
+"g",
+"V"
+],
+[
+"carotte",
+0.1,
+"kg",
+"F"
+],
+[
+"champignons",
+0.1,
+"kg",
+"F"
+],
+[
+"crème fraîche",
+5,
+"cl",
+"C"
+]
+]
+},
+{
+"n": "Chili de haricots rouges",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"haricots rouges",
+0.1,
+"kg",
+"E"
+],
+[
+"tomates concassées",
+0.15,
+"kg",
+"E"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+],
+[
+"poivron",
+0.5,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Boulgour aux légumes rôtis",
+"t": "r",
+"m": [
+9,
+10,
+11,
+3,
+4
+],
+"a": 0,
+"i": [
+[
+"boulgour",
+70,
+"g",
+"E"
+],
+[
+"courge",
+0.2,
+"kg",
+"F"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Omelette aux champignons",
+"t": "r",
+"m": [
+9,
+10,
+11,
+3,
+4
+],
+"a": 0,
+"i": [
+[
+"œufs",
+2,
+"pc",
+"O"
+],
+[
+"champignons",
+0.1,
+"kg",
+"F"
+],
+[
+"salade",
+0.1,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Gratin de courgettes",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"courgette",
+0.3,
+"kg",
+"F"
+],
+[
+"gruyère râpé",
+30,
+"g",
+"C"
+],
+[
+"crème fraîche",
+5,
+"cl",
+"C"
+]
+]
+},
+{
+"n": "Ratatouille",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 1,
+"i": [
+[
+"aubergine",
+0.15,
+"kg",
+"F"
+],
+[
+"courgette",
+0.15,
+"kg",
+"F"
+],
+[
+"poivron",
+0.5,
+"pc",
+"F"
+],
+[
+"tomate",
+0.2,
+"kg",
+"F"
+]
+]
+},
+{
+"n": "Pâtes tomates basilic",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"pâtes",
+90,
+"g",
+"E"
+],
+[
+"tomate",
+0.3,
+"kg",
+"F"
+],
+[
+"basilic",
+0.1,
+"pot",
+"F"
+]
+]
+},
+{
+"n": "Salade tomates mozzarella",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"tomate",
+0.25,
+"kg",
+"F"
+],
+[
+"mozzarella",
+0.5,
+"pc",
+"C"
+],
+[
+"pain",
+0.1,
+"pc",
+"E"
+]
+]
+},
+{
+"n": "Salade concombre feta",
+"t": "r",
+"m": [
+5,
+6,
+7,
+8
+],
+"a": 0,
+"i": [
+[
+"concombre",
+0.5,
+"pc",
+"F"
+],
+[
+"feta",
+50,
+"g",
+"C"
+],
+[
+"semoule",
+60,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Asperges et œufs mollets",
+"t": "r",
+"m": [
+4,
+5,
+6
+],
+"a": 0,
+"i": [
+[
+"asperges",
+0.25,
+"kg",
+"F"
+],
+[
+"œufs",
+1,
+"pc",
+"O"
+],
+[
+"pain",
+0.1,
+"pc",
+"E"
+]
+]
+},
+{
+"n": "Risotto aux petits pois",
+"t": "r",
+"m": [
+4,
+5,
+6
+],
+"a": 0,
+"i": [
+[
+"orge perlé",
+70,
+"g",
+"E"
+],
+[
+"petits pois",
+0.15,
+"kg",
+"F"
+],
+[
+"parmesan",
+15,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Compote de pommes maison",
+"t": "g",
+"m": [
+9,
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 1,
+"i": [
+[
+"pomme",
+0.25,
+"kg",
+"F"
+]
+]
+},
+{
+"n": "Yaourt et banane",
+"t": "g",
+"m": [],
+"a": 0,
+"i": [
+[
+"yaourt nature",
+1,
+"pc",
+"C"
+],
+[
+"banane",
+1,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Crêpes",
+"t": "g",
+"m": [],
+"a": 1,
+"i": [
+[
+"farine",
+40,
+"g",
+"E"
+],
+[
+"œufs",
+0.5,
+"pc",
+"O"
+],
+[
+"lait",
+12,
+"cl",
+"C"
+]
+]
+},
+{
+"n": "Gâteau au yaourt",
+"t": "g",
+"m": [],
+"a": 1,
+"i": [
+[
+"yaourt nature",
+0.25,
+"pc",
+"C"
+],
+[
+"farine",
+40,
+"g",
+"E"
+],
+[
+"œufs",
+0.5,
+"pc",
+"O"
+],
+[
+"sucre",
+25,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Poire et fromage blanc",
+"t": "g",
+"m": [
+9,
+10,
+11,
+12,
+1
+],
+"a": 0,
+"i": [
+[
+"poire",
+1,
+"pc",
+"F"
+],
+[
+"fromage blanc",
+100,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Fraises et fromage blanc",
+"t": "g",
+"m": [
+4,
+5,
+6
+],
+"a": 0,
+"i": [
+[
+"fraises",
+0.15,
+"kg",
+"F"
+],
+[
+"fromage blanc",
+100,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Abricots et amandes",
+"t": "g",
+"m": [
+6,
+7,
+8
+],
+"a": 0,
+"i": [
+[
+"abricots",
+0.2,
+"kg",
+"F"
+],
+[
+"amandes",
+15,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Clémentines et noix",
+"t": "g",
+"m": [
+11,
+12,
+1,
+2
+],
+"a": 0,
+"i": [
+[
+"clémentines",
+2,
+"pc",
+"F"
+],
+[
+"noix",
+15,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Soupe de carottes au cumin",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 1,
+"i": [
+[
+"carotte",
+0.3,
+"kg",
+"F"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+],
+[
+"cumin",
+0.02,
+"pot",
+"E"
+]
+]
+},
+{
+"n": "Gratin de chou-fleur",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2,
+3
+],
+"a": 0,
+"i": [
+[
+"chou-fleur",
+0.3,
+"kg",
+"F"
+],
+[
+"lait",
+12,
+"cl",
+"C"
+],
+[
+"gruyère râpé",
+30,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Tajine de poulet et pois chiches",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"poulet",
+0.2,
+"kg",
+"V"
+],
+[
+"pois chiches",
+0.1,
+"kg",
+"E"
+],
+[
+"carotte",
+0.1,
+"kg",
+"F"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Curry de légumes",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"chou-fleur",
+0.15,
+"kg",
+"F"
+],
+[
+"pois chiches",
+0.08,
+"kg",
+"E"
+],
+[
+"lait de coco",
+10,
+"cl",
+"E"
+],
+[
+"oignon",
+0.5,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Hachis de lentilles et carottes",
+"t": "r",
+"m": [],
+"a": 1,
+"i": [
+[
+"lentilles vertes",
+70,
+"g",
+"E"
+],
+[
+"carotte",
+0.15,
+"kg",
+"F"
+],
+[
+"pomme de terre",
+1.5,
+"pc",
+"F"
+],
+[
+"beurre",
+10,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Truite et pommes de terre vapeur",
+"t": "r",
+"m": [],
+"a": 0,
+"i": [
+[
+"truite",
+150,
+"g",
+"V"
+],
+[
+"pomme de terre",
+2,
+"pc",
+"F"
+],
+[
+"citron",
+0.25,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Pâtes à la courge et sauge",
+"t": "r",
+"m": [
+10,
+11,
+12,
+1,
+2
+],
+"a": 0,
+"i": [
+[
+"pâtes",
+90,
+"g",
+"E"
+],
+[
+"courge",
+0.2,
+"kg",
+"F"
+],
+[
+"parmesan",
+15,
+"g",
+"C"
+]
+]
+},
+{
+"n": "Polenta et poêlée de champignons",
+"t": "r",
+"m": [
+9,
+10,
+11
+],
+"a": 0,
+"i": [
+[
+"polenta",
+70,
+"g",
+"E"
+],
+[
+"champignons",
+0.15,
+"kg",
+"F"
+],
+[
+"ail",
+0.25,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Gaspacho",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 1,
+"i": [
+[
+"tomate",
+0.4,
+"kg",
+"F"
+],
+[
+"concombre",
+0.25,
+"pc",
+"F"
+],
+[
+"poivron",
+0.25,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Courgettes farcies",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"courgette",
+0.3,
+"kg",
+"F"
+],
+[
+"dinde hachée",
+100,
+"g",
+"V"
+],
+[
+"semoule",
+40,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Haricots verts et œufs durs",
+"t": "r",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"haricots verts",
+0.2,
+"kg",
+"F"
+],
+[
+"œufs",
+1,
+"pc",
+"O"
+],
+[
+"pomme de terre",
+1,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Soupe de petits pois à la menthe",
+"t": "r",
+"m": [
+4,
+5,
+6
+],
+"a": 1,
+"i": [
+[
+"petits pois",
+0.25,
+"kg",
+"F"
+],
+[
+"pomme de terre",
+1,
+"pc",
+"F"
+],
+[
+"menthe",
+0.1,
+"pot",
+"F"
+]
+]
+},
+{
+"n": "Muffins aux pommes",
+"t": "g",
+"m": [
+9,
+10,
+11,
+12,
+1,
+2
+],
+"a": 1,
+"i": [
+[
+"pomme",
+0.5,
+"pc",
+"F"
+],
+[
+"farine",
+40,
+"g",
+"E"
+],
+[
+"œufs",
+0.5,
+"pc",
+"O"
+],
+[
+"sucre",
+20,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Salade de fruits d’hiver",
+"t": "g",
+"m": [
+11,
+12,
+1,
+2,
+3
+],
+"a": 0,
+"i": [
+[
+"pomme",
+0.5,
+"pc",
+"F"
+],
+[
+"clémentines",
+1,
+"pc",
+"F"
+],
+[
+"kiwi",
+1,
+"pc",
+"F"
+]
+]
+},
+{
+"n": "Melon et jambon sec",
+"t": "g",
+"m": [
+6,
+7,
+8
+],
+"a": 0,
+"i": [
+[
+"melon",
+0.25,
+"pc",
+"F"
+],
+[
+"jambon sec",
+1,
+"tr",
+"V"
+]
+]
+},
+{
+"n": "Pêche et yaourt",
+"t": "g",
+"m": [
+6,
+7,
+8,
+9
+],
+"a": 0,
+"i": [
+[
+"pêche",
+1,
+"pc",
+"F"
+],
+[
+"yaourt nature",
+1,
+"pc",
+"C"
+]
+]
+},
+{
+"n": "Semoule au lait",
+"t": "g",
+"m": [],
+"a": 1,
+"i": [
+[
+"semoule",
+25,
+"g",
+"E"
+],
+[
+"lait",
+20,
+"cl",
+"C"
+],
+[
+"sucre",
+10,
+"g",
+"E"
+]
+]
+},
+{
+"n": "Raisin et comté",
+"t": "g",
+"m": [
+8,
+9,
+10
+],
+"a": 0,
+"i": [
+[
+"raisin",
+0.15,
+"kg",
+"F"
+],
+[
+"comté",
+20,
+"g",
+"C"
+]
+]
+}
+]
